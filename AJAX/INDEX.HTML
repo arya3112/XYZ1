@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form with AJAX and Table</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-color: rgb(255, 184, 184);
+      font-family: sans-serif;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgb(0, 0, 0);
+      background-color: rgb(255, 255, 255);
+      margin-bottom: 20px;
+    }
+
+    #submit {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+    }
+
+    #submit:hover {
+      background-color: darkgray;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fill the Registration Form</h1>
+
+  <div class="card">
+    <form id="regForm">
+      <label>Enter your name</label>
+      <input type="text" id="firstname" name="firstname" required /><br />
+
+      <label>Enter your surname</label>
+      <input type="text" id="lastname" name="lastname" required /><br />
+
+      <label>Enter Date</label>
+      <input type="date" id="date" name="date" required /><br />
+
+      <label>Select your Gender</label><br />
+      <input type="radio" name="gender" value="Male" required /> Male
+      <input type="radio" name="gender" value="Female" /> Female<br /><br />
+
+      <label>Enter your email_id</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <input type="submit" id="submit" value="Submit" />
+    </form>
+  </div>
+
+  <h2>Submitted Data</h2>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Date</th>
+        <th>Gender</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('regForm');
+    const tbody = document.querySelector('#dataTable tbody');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const data = {
+        firstname: document.getElementById('firstname').value,
+        lastname: document.getElementById('lastname').value,
+        date: document.getElementById('date').value,
+        gender: document.querySelector('input[name="gender"]:checked').value,
+        email: document.getElementById('email').value,
+      };
+
+      // Simulated AJAX response using setTimeout
+      setTimeout(() => {
+        // Simulating responseData from server
+        const responseData = data;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${responseData.firstname}</td>
+          <td>${responseData.lastname}</td>
+          <td>${responseData.date}</td>
+          <td>${responseData.gender}</td>
+          <td>${responseData.email}</td>
+        `;
+        tbody.appendChild(row);
+
+        alert('Registration done !!!');
+        form.reset();
+      }, 500); // simulate 500ms delay
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<h1>Simple Angular Auth Page</h1>
+
+<!-- Register Form -->
+<div style="border: 1px solid black; padding: 10px; margin-bottom: 20px;">
+  <h2>Register</h2>
+  <input [(ngModel)]="name" placeholder="Name"><br><br>
+  <input [(ngModel)]="phone" placeholder="Phone"><br><br>
+  <input [(ngModel)]="email" placeholder="Email"><br><br>
+  <input [(ngModel)]="password" type="password" placeholder="Password"><br><br>
+  <button (click)="register()">Register</button>
+</div>
+
+<!-- Login Form -->
+<div style="border: 1px solid black; padding: 10px; margin-bottom: 20px;">
+  <h2>Login</h2>
+  <input [(ngModel)]="loginEmail" placeholder="Email"><br><br>
+  <input [(ngModel)]="loginPassword" type="password" placeholder="Password"><br><br>
+  <button (click)="login()">Login</button>
+  <p *ngIf="loginFailed" style="color:red">Invalid login. Try again.</p>
+</div>
+
+<!-- Display User Data -->
+<div *ngIf="isLoggedIn" style="border: 1px solid green; padding: 10px;">
+  <h2>Welcome, {{ name }}!</h2>
+  <p><strong>Phone:</strong> {{ phone }}</p>
+  <p><strong>Email:</strong> {{ email }}</p>
+</div>
+
